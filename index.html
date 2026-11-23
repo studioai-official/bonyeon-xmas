@@ -728,11 +728,11 @@ nav button.arr{background:#fffaf6;color:#e2546a;border:2px solid #f0c3cd;box-sha
     <div class="lff"><label for="f_birth">생년월일</label><input id="f_birth" name="birth" placeholder="2008.01.01" inputmode="numeric"></div></div>
     <div class="lrow"><div class="lff"><label for="f_tel">연락처</label><input id="f_tel" name="tel" type="tel" placeholder="010-0000-0000" autocomplete="tel" inputmode="tel"></div>
     <div class="lff"><label for="f_addr">사는 곳</label><input id="f_addr" name="addr" placeholder="서울 ○○구"></div></div>
-    <div class="lff lref"><label for="f_ref">추천인 <em>(선택)</em></label><input id="f_ref" name="ref" placeholder="추천해 준 사람의 이름 (없으면 비워두세요)" maxlength="30"></div>
+    <div class="lff lref"><label for="f_ref">추천인</label><input id="f_ref" name="ref" placeholder="추천해 준 사람의 이름" maxlength="30" required aria-required="true"></div>
     <fieldset class="lint"><legend>관심 있는 체험 <em>(여러 개 선택 가능)</em></legend><div class="lchips"><label class="lchip"><input type="checkbox" name="interest" value="미니 퍼스널 컬러"><span>퍼스널 컬러</span></label><label class="lchip"><input type="checkbox" name="interest" value="메이크업 코칭"><span>메이크업 코칭</span></label><label class="lchip"><input type="checkbox" name="interest" value="미니 네일·뷰티 체험"><span>네일·뷰티</span></label><label class="lchip"><input type="checkbox" name="interest" value="연애 코칭"><span>연애 코칭</span></label><label class="lchip"><input type="checkbox" name="interest" value="크리스마스 뜨개 체험"><span>뜨개 체험</span></label><label class="lchip"><input type="checkbox" name="interest" value="이너뷰티 프로그램"><span>이너뷰티</span></label><label class="lchip"><input type="checkbox" name="interest" value="새내기 스타일링"><span>새내기 스타일링</span></label><label class="lchip"><input type="checkbox" name="interest" value="진로 컨설팅"><span>진로 컨설팅</span></label></div></fieldset>
     <div class="lag">
       <div class="lagt">개인정보 수집·이용 동의 <em>(필수)</em></div>
-      <div class="lagd">수집 주체: 본연 스튜디오<br>수집 항목: 성함, 생년월일, 연락처, 사는 곳, 관심 체험, 추천인(선택)<br>수집 목적: 체험 신청 확인 및 안내 연락<br>보유 기간: 이벤트 종료 후 즉시 파기</div>
+      <div class="lagd">수집 주체: 본연 스튜디오<br>수집 항목: 성함, 생년월일, 연락처, 사는 곳, 관심 체험, 추천인<br>수집 목적: 체험 신청 확인 및 안내 연락<br>보유 기간: 이벤트 종료 후 즉시 파기</div>
       <div class="lagq" id="agQ">위 내용에 동의하십니까?</div>
       <div class="lagb" role="group" aria-labelledby="agQ"><button type="button" class="yes" id="agYes">예</button><button type="button" class="no" id="agNo">아니요</button></div>
       <div id="sfErr" class="lerr" role="alert"></div>
@@ -849,6 +849,7 @@ function doSubmit(){
   if(!f.birth.value.trim()) return say('생년월일을 입력해주세요.', f.birth);
   if(!/^01[0-9]-?\d{3,4}-?\d{4}$/.test(f.tel.value.trim())) return say('연락처를 010-0000-0000 형식으로 입력해주세요.', f.tel);
   if(!f.addr.value.trim()) return say('사는 곳을 입력해주세요.', f.addr);
+  if(!f.ref.value.trim()) return say('추천인을 입력해주세요.', f.ref);
   var picks=[].slice.call(sf.querySelectorAll('input[name=interest]:checked')).map(function(x){return x.value;});
   if(!picks.length) return say('관심 있는 체험을 하나 이상 골라주세요.', sf.querySelector('input[name=interest]'));
   err.textContent='';
